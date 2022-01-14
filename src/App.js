@@ -4,7 +4,7 @@ import Characters from './components/Characters';
 
 function App() {
   return (
-    <div className="App">
+    <div className="App" >
       <h1>Hello World</h1>
       <Header></Header>
       <Characters></Characters>
