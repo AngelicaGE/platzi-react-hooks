@@ -1,4 +1,5 @@
 import React, {useState, useEffect, useReducer} from 'react'
+import '../styles/Characters.scss';
 
 const initialState = {
     favoritesState: []

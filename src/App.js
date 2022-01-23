@@ -1,4 +1,4 @@
-import './App.css';
+import './styles/global.css'
 import Header from './components/Header';
 import Characters from './components/Characters';
 

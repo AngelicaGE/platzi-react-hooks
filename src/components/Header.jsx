@@ -14,7 +14,7 @@ const Header = () => {
     const color = useContext(ThemeContext);
 
     return (
-        <div className='Header'>
+        <header className='Header'>
             <h1 style={{color}}>HOOKS</h1>
             <h4>Option 1</h4>
             <button type='button' onClick={handleClick}> 
@@ -24,7 +24,7 @@ const Header = () => {
             <button type='button' onClick={() => setDarkMode(!darkMode)}> 
               {darkMode ? 'Dark Mode' : 'Light Mode'}
             </button>
-        </div>
+        </header>
     );
 }
 

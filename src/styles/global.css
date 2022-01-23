@@ -1,0 +1,10 @@
+/* 
+This removes styles that tags have by default in their padding and margin
+box-sizing: border-box; Is to recalculate the padding and border (not matgin)
+*/
+
+*{ 
+    box-sizing: border-box; 
+    padding: 0; 
+    margin: 0; 
+}
