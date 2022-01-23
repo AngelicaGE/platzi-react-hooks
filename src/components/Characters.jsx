@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useReducer} from 'react'
+import React, {useState, useEffect, useReducer, useMemo} from 'react'
 import '../styles/Characters.scss';
 
 const initialState = {
@@ -30,6 +30,10 @@ const favoritesReducer = (state, action) => {
 const Characters = () => {
     // my state
     const [characters, setCharacters] = useState([]);
+    // my reducer
+    const [favorites, dispatch] = useReducer(favoritesReducer, initialState);
+    // my memoization
+    const [search, setSearch] = useState('');
     
     // my effect
     // params: anonymous function for the logic, variable that listenes for a change
@@ -40,13 +44,23 @@ const Characters = () => {
             .then(data => setCharacters(data.results));
     }, []);
 
-    // my reducer
-    const [favorites, dispatch] = useReducer(favoritesReducer, initialState);
+
 
     const handleClick = (action, favorite )=> {
         dispatch({type: action, payload: favorite})
     }
 
+
+    const handleSearch = (event) => {
+        setSearch(event.target.value);
+    }
+
+    const filteredCharacters = useMemo(() =>
+        characters.filter((character) => {
+            return character.name.toLowerCase().includes(search.toLowerCase());
+        }),
+        [characters, search]
+  )
 
     return (
         <div className='Characters'>
@@ -59,8 +73,11 @@ const Characters = () => {
                     </button>
                 </ul>
             ))}   
+            <div>
+                Search: <input type="text" value={search} onChange={handleSearch}></input>
+            </div>
             Characters:
-            {characters.map(character => (
+            {filteredCharacters.map(character => (
                 <div className='item' key={character.id}>
                     <h2>{character.name}</h2>
                     {
