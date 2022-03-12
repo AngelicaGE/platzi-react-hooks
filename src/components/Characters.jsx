@@ -1,5 +1,7 @@
-import React, {useState, useEffect, useReducer, useMemo, useRef} from 'react'
+import React, {useState, useEffect, useReducer, useMemo, useRef, useCallback} from 'react'
 import '../styles/Characters.scss';
+import Search from './Search';
+//useCallback: Prevent unnecesary calculations in functions
 
 const initialState = {
     favoritesState: []
@@ -34,6 +36,7 @@ const Characters = () => {
     const [favorites, dispatch] = useReducer(favoritesReducer, initialState);
     // my memoization
     const [search, setSearch] = useState('');
+    // my useRef
     const searchInput = useRef(null )
     
     // my effect
@@ -52,10 +55,13 @@ const Characters = () => {
     }
 
 
-    const handleSearch = () => {
-        //setSearch(event.target.value);
+    //const handleSearch = () => {
+    //    setSearch(searchInput.current.value)
+    //}
+
+    const handleSearch = useCallback(()=>{
         setSearch(searchInput.current.value)
-    }
+    }, [])
 
     const filteredCharacters = useMemo(() =>
         characters.filter((character) => {
@@ -75,9 +81,9 @@ const Characters = () => {
                     </button>
                 </ul>
             ))}   
-            <div>
-                Search: <input type="text" ref={searchInput} value={search} onChange={handleSearch}></input>
-            </div>
+
+            <Search search={search} searchInput={searchInput} handleSearch={handleSearch}></Search>
+           
             Characters:
             {filteredCharacters.map(character => (
                 <div className='item' key={character.id}>
