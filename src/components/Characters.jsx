@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useReducer, useMemo} from 'react'
+import React, {useState, useEffect, useReducer, useMemo, useRef} from 'react'
 import '../styles/Characters.scss';
 
 const initialState = {
@@ -34,6 +34,7 @@ const Characters = () => {
     const [favorites, dispatch] = useReducer(favoritesReducer, initialState);
     // my memoization
     const [search, setSearch] = useState('');
+    const searchInput = useRef(null )
     
     // my effect
     // params: anonymous function for the logic, variable that listenes for a change
@@ -51,8 +52,9 @@ const Characters = () => {
     }
 
 
-    const handleSearch = (event) => {
-        setSearch(event.target.value);
+    const handleSearch = () => {
+        //setSearch(event.target.value);
+        setSearch(searchInput.current.value)
     }
 
     const filteredCharacters = useMemo(() =>
@@ -74,7 +76,7 @@ const Characters = () => {
                 </ul>
             ))}   
             <div>
-                Search: <input type="text" value={search} onChange={handleSearch}></input>
+                Search: <input type="text" ref={searchInput} value={search} onChange={handleSearch}></input>
             </div>
             Characters:
             {filteredCharacters.map(character => (
