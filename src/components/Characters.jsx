@@ -1,11 +1,13 @@
-import React, {useState, useEffect, useReducer, useMemo, useRef, useCallback} from 'react'
+import React, {useState, useReducer, useMemo, useRef, useCallback} from 'react'
 import '../styles/Characters.scss';
 import Search from './Search';
-//useCallback: Prevent unnecesary calculations in functions
+import useCharacters from '../hooks/useCharacter';
 
 const initialState = {
     favoritesState: []
 }
+
+const API = 'https://rickandmortyapi.com/api/character/';
 
 //my reducer: in charge to add characters to 'favorites'
 const favoritesReducer = (state, action) => {
@@ -30,34 +32,19 @@ const favoritesReducer = (state, action) => {
 
 
 const Characters = () => {
-    // my state
-    const [characters, setCharacters] = useState([]);
     // my reducer
     const [favorites, dispatch] = useReducer(favoritesReducer, initialState);
     // my memoization
     const [search, setSearch] = useState('');
     // my useRef
     const searchInput = useRef(null )
-    
-    // my effect
-    // params: anonymous function for the logic, variable that listenes for a change
-    // the array will be listening for changes in the effect and rerender when there is a change.
-    useEffect(() => {
-        fetch('https://rickandmortyapi.com/api/character/')
-            .then(res => res.json())
-            .then(data => setCharacters(data.results));
-    }, []);
 
+    const characters = useCharacters(API);
 
 
     const handleClick = (action, favorite )=> {
         dispatch({type: action, payload: favorite})
     }
-
-
-    //const handleSearch = () => {
-    //    setSearch(searchInput.current.value)
-    //}
 
     const handleSearch = useCallback(()=>{
         setSearch(searchInput.current.value)
