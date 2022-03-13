@@ -1,6 +1,12 @@
 @import '_vars';
 
-
 body{
-    background-color: var(--hospital-green);
+    background-color: antiquewhite;
+}
+.card{
+    height: 100%;
+}
+.Characters .row div{
+    margin-bottom: 10px;
+
 }

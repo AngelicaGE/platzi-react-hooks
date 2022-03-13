@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import Characters from "../components/Characters";
 // custom hooks: rools to build our own react hooks
 
 const useCharacters = url => {
