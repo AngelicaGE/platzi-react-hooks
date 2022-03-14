@@ -1,12 +1,13 @@
 @import '_vars';
 
-body{
-    background-color: antiquewhite;
-}
 .card{
     height: 100%;
+    color: black;
 }
 .Characters .row div{
     margin-bottom: 10px;
 
+}
+.Characters button{
+    width: 100%;
 }

@@ -52,6 +52,12 @@ const Landing = () => {
         setSearch(searchInput.current.value)
     }, [])
 
+    const handleSearchFav = (val) =>{
+        searchInput.current.value = val;
+        handleSearch();
+    }
+
+
     const filteredCharacters = useMemo(() =>
         characters.filter((character) => {
             return character.name.toLowerCase().includes(search.toLowerCase());
@@ -60,13 +66,14 @@ const Landing = () => {
   )
 
     return (
-        <div className='Landing'>
+        <div className='Landing container'>
+
+            <h2>Favorites:</h2>
+            <Favorites favorites={favorites} handleClick={handleClick} handleSearch={handleSearchFav}></Favorites>
+
             <Search search={search} searchInput={searchInput} handleSearch={handleSearch}></Search>
 
-            Favorites:
-            <Favorites favorites={favorites} handleClick={handleClick}></Favorites>
-           
-            Characters:
+            <h2>Characters:</h2>
             <Characters characters={filteredCharacters} favorites={favorites} handleClick={handleClick}></Characters>
         </div>
     );

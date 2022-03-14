@@ -1,0 +1,19 @@
+.Favorites figure{
+    position: relative;
+}
+.Favorites .hr-scroll{
+    overflow-x: scroll; 
+}
+.Favorites button{
+    position: absolute;
+    background-color: white;
+}
+.figure{
+    width: fit-content;
+}
+.Favorites img{
+    border-radius: 50px;
+}
+.Favorites{
+    overflow: hidden; /* Hide scrollbars */
+}

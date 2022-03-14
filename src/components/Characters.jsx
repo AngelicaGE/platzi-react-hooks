@@ -17,7 +17,10 @@ const Characters = ({ characters, favorites, handleClick }) => {
                 </Card.Text>
                 <Card.Text>Species: {character.species}</Card.Text>
                 <Card.Text>Origin: {character.origin.name}</Card.Text>
-                {
+              
+              </Card.Body>
+              <Card.Footer>
+              {
                   //***** BUTTON *****
                   favorites.favoritesState.find(
                     (item) => item.id === character.id
@@ -41,7 +44,7 @@ const Characters = ({ characters, favorites, handleClick }) => {
                     </Button>
                   )
                 }
-              </Card.Body>
+              </Card.Footer>
             </Card>
           </Col>
         ))}
